@@ -1,15 +1,15 @@
 class RolesController{
 
-    saveRole(req:Request,resp:Response):void{
+    saveRole(req:any,resp:any):void{
 
     }
-    updateRole(req:Request,resp:Response):void{
+    updateRole(req:any,resp:any):void{
 
     }
-    deleteRole(req:Request,resp:Response):void{
+    deleteRole(req:any,resp:any):void{
 
     }
-    getAllRoles(req:Request,resp:Response):void{
+    getAllRoles(req:any,resp:any):void{
 
     }
 }

@@ -1,15 +1,15 @@
 class UserController{
 
-    saveUser(req:Request,resp:Response):void{
+    saveUser(req:any,resp:any):void{
 
     }
-    updateUser(req:Request,resp:Response):void{
+    updateUser(req:any,resp:any):void{
 
     }
-    deleteUser(req:Request,resp:Response):void{
+    deleteUser(req:any,resp:any):void{
 
     }
-    getAllUsers(req:Request,resp:Response):void{
+    getAllUsers(req:any,resp:any):void{
 
     }
 }

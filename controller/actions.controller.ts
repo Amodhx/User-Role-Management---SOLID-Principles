@@ -1,15 +1,15 @@
 class ActionsController{
 
-    saveAction(req:Request,resp:Response):void{
+    saveAction(req:any,resp:any):void{
 
     }
-    deleteAction(req:Request,resp:Response):void{
+    deleteAction(req:any,resp:any):void{
 
     }
-    updateAction(req:Request,resp:Response):void{
+    updateAction(req:any,resp:any):void{
 
     }
-    getAllActions(req:Request,resp:Response):void{
+    getAllActions(req:any,res:any):void{
 
     }
 }
