@@ -27,10 +27,10 @@ class RolesController{
             resp.status(500).send(err);
         }
     }
-    getAllRoles(req:any,resp:any){
+    async getAllRoles(req: any, resp: any) {
         try {
-            resp.status(201).send(rolesService.getAllRoles());
-        }catch (err){
+            resp.status(201).send(await rolesService.getAllRoles());
+        } catch (err) {
             resp.status(500).send(err);
         }
     }
