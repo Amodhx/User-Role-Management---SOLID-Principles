@@ -1,6 +1,5 @@
 import {RoleModel} from "../model/role.model";
 import prisma from "../prisma/client";
-import {UserModel} from "../model/user.model";
 
 class UserDao{
 
@@ -10,14 +9,14 @@ class UserDao{
             const user:any = await prisma.user.create({
                 data: {
                     name,
-                    roles: {
+                    UserRole: {
                         create: roleIds.map((roleId) => ({
                             roleId,
                         })),
                     },
                 },
                 include: {
-                    roles: {
+                    UserRole: {
                         include: {
                             role: true,
                         },
@@ -34,22 +33,22 @@ class UserDao{
     async getAllUsers(){
         return await prisma.user.findMany();
     }
-    async updateUser(id:number,name:string,roles:RoleModel[]){
+    async updateUser(id:any,name:string,roles:RoleModel[]){
         try {
             const roleIds = roles.map((role) => role.id);
+            id = Math.floor(id);
             const user:any = await prisma.user.update({
                 where: { id },
                 data: {
                     name,
-                    roles: {
-                        deleteMany: {},
+                    UserRole: {
                         create: roleIds.map((roleId) => ({
                             roleId,
                         })),
                     },
                 },
                 include: {
-                    roles: {
+                    UserRole: {
                         include: {
                             role: true,
                         },
@@ -64,7 +63,8 @@ class UserDao{
         }
     }
 
-    async deleteUser(id:number){
+    async deleteUser(id:any){
+        id = Math.floor(id);
         await prisma.user.delete({
             where: { id },
         });

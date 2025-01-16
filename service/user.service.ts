@@ -10,7 +10,7 @@ class UserService{
         return await userDao.getAllUsers();
     }
     async updateUser(userData:UserModel){
-        return await userDao.updateUser(userData.id,userData.name,userData.roles);
+        return await userDao.updateUser(userData.id ,userData.name,userData.roles);
     }
     async deleteUser(id:number){
         return await userDao.deleteUser(id);

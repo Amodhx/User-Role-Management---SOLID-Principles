@@ -20,7 +20,7 @@ class UserController{
     }
     async deleteUser(req:any,resp:any){
         try {
-            await userService.deleteUser(req.params.id)
+            await userService.deleteUser(req.query['id'])
             resp.status(201).send("User Deleted")
         }catch (err){
             resp.status(500).send(err)
