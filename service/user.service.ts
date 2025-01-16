@@ -1,14 +1,10 @@
 import {UserModel} from "../model/user.model";
-import prisma from "../prisma/client";
+import userDao from "../dao/user.dao";
 
 class UserService{
 
-    async createUser(userData : UserModel){
-        return prisma.user.create({
-            data: {
-                name: userData.name,
-            },
-        });
+    async saveUser(userData : UserModel){
+        return await userDao.createUser(userData.name,userData.roles);
     }
 }
 const userService = new UserService();

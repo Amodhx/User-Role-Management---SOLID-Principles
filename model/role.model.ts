@@ -6,5 +6,4 @@ export interface RoleModel{
     name:string
     users : UserModel[]
     actions : ActionModel[]
-
 }

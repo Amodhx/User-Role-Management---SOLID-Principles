@@ -4,7 +4,7 @@ class UserController{
 
     async saveUser(req:any,resp:any){
         try {
-            const user = await userService.createUser(req.body);
+            const user = await userService.saveUser(req.body);
             resp.status(201).send(user)
         }catch (e){
             resp.status(500).send("INTERNAL SERVER ERROR")
