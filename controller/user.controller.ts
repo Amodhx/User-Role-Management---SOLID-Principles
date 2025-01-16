@@ -10,14 +10,28 @@ class UserController{
             resp.status(500).send("INTERNAL SERVER ERROR")
         }
     }
-    updateUser(req:any,resp:any):void{
-
+    async updateUser(req:any,resp:any){
+        try {
+            const user = await userService.updateUser(req.body)
+            resp.status(201).send(user)
+        }catch (err){
+            resp.status(500).send(err)
+        }
     }
-    deleteUser(req:any,resp:any):void{
-
+    async deleteUser(req:any,resp:any){
+        try {
+            await userService.deleteUser(req.params.id)
+            resp.status(201).send("User Deleted")
+        }catch (err){
+            resp.status(500).send(err)
+        }
     }
-    getAllUsers(req:any,resp:any):void{
-
+    async getAllUsers(req:any,resp:any){
+        try {
+            resp.status(201).send(await userService.getAllUsers())
+        }catch (err){
+            resp.status(500).send(err);
+        }
     }
 }
 const userController = new UserController();
