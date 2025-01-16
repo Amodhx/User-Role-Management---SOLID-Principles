@@ -1,0 +1,4 @@
+class RoleModel{
+    id:number
+
+}
