@@ -1,7 +1,7 @@
-import {PermissionModel} from "./permission.model";
+import {RoleModel} from "./role.model";
 
 export interface ActionModel{
     id:number
     name:string
-    permissions : PermissionModel[]
+    roles : RoleModel[]
 }

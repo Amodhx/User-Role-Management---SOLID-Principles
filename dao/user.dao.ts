@@ -31,7 +31,7 @@ class UserDao{
         }
     }
     async getAllUsers(){
-        return await prisma.user.findMany();
+        return prisma.user.findMany();
     }
     async updateUser(id:any,name:string,roles:RoleModel[]){
         try {
