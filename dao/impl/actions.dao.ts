@@ -1,10 +1,13 @@
-import {RoleModel} from "../model/role.model";
-import prisma from "../prisma/client";
+import {RoleModel} from "../../model/role.model";
+import prisma from "../../prisma/client";
+import {BaseDao} from "../base.dao";
+import {name} from "express";
 
-class ActionsDao{
-    async createAction(name:string,roles:RoleModel[]){
+class ActionsDao implements BaseDao<RoleModel>{
+
+    async create(name: string, list: RoleModel[]) {
         try {
-            let roleIds = roles.map((role:RoleModel) => role.id);
+            let roleIds = list.map((role:RoleModel) => role.id);
             const action:any = await prisma.action.create({
                 data : {
                     name,
@@ -28,10 +31,22 @@ class ActionsDao{
             throw new Error('Failed to create user with roles.');
         }
     }
-    async updateAction(id:number,name:string,roles:RoleModel[]){
+
+    async delete(id: number) {
+        id = Math.floor(id);
+        await prisma.action.delete({
+            where : {id}
+        })
+    }
+
+    async findAll() {
+        return prisma.action.findMany();
+    }
+
+    async update(id: number, name: string, list: RoleModel[]) {
         id = Math.floor(id);
         try {
-            let roleIds = roles.map((role:RoleModel) => role.id);
+            let roleIds = list.map((role:RoleModel) => role.id);
             const action:any = await prisma.action.update({
                 where : {id},
                 data : {
@@ -55,15 +70,6 @@ class ActionsDao{
             console.error('Error in UserDAO.createUser:', err);
             throw new Error('Failed to create user with roles.');
         }
-    }
-    async deleteAction(id:number){
-        id = Math.floor(id);
-        await prisma.action.delete({
-            where : {id}
-        })
-    }
-    async getAllActions(){
-        return prisma.action.findMany();
     }
 }
 

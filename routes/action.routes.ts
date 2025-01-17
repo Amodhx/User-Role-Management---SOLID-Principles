@@ -1,6 +1,6 @@
 import {Router} from "express";
 import ActionsController from "../controller/actions.controller.ts";
-import ActionsDao from "../dao/actions.dao";
+import ActionsDao from "../dao/impl/actions.dao";
 import ActionsService from "../service/actions.service";
 class ActionRoutes{
     router :Router

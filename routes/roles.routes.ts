@@ -1,7 +1,7 @@
 import {Router} from "express";
 import RolesController from "../controller/roles.controller";
 import RolesService from "../service/roles.service";
-import RoleDao from "../dao/role.dao";
+import RoleDao from "../dao/impl/role.dao";
 
 class RolesRoutes{
     router:Router

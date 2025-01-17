@@ -1,5 +1,5 @@
 import {UserModel} from "../model/user.model";
-import UserDao from "../dao/user.dao";
+import UserDao from "../dao/impl/user.dao";
 
 class UserService{
     userDao : UserDao;
@@ -8,16 +8,16 @@ class UserService{
     }
 
     async saveUser(userData : UserModel){
-        return await this.userDao.createUser(userData.name,userData.roles);
+        return await this.userDao.create(userData.name,userData.roles);
     }
     async getAllUsers(){
-        return await this.userDao.getAllUsers();
+        return await this.userDao.findAll();
     }
     async updateUser(userData:UserModel){
-        return await this.userDao.updateUser(userData.id ,userData.name,userData.roles);
+        return await this.userDao.update(userData.id ,userData.name,userData.roles);
     }
     async deleteUser(id:number){
-        return await this.userDao.deleteUser(id);
+        return await this.userDao.delete(id);
     }
 }
 export default UserService;

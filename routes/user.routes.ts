@@ -1,7 +1,7 @@
 import {Router} from "express";
 import UserController from "../controller/user.controller";
 import UserService from "../service/user.service";
-import UserDao from "../dao/user.dao";
+import UserDao from "../dao/impl/user.dao";
 
 class UserRoutes{
     router:Router

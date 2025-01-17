@@ -1,11 +1,13 @@
-import {UserModel} from "../model/user.model";
-import prisma from "../prisma/client";
+import {UserModel} from "../../model/user.model";
+import prisma from "../../prisma/client";
+import {BaseDao} from "../base.dao";
+import {name} from "express";
 
-class RoleDao{
+class RoleDao implements BaseDao<UserModel>{
 
-    async createRole(name:string,users:UserModel[]){
+    async create(name: string, list: UserModel[]) {
         try {
-            const userIds = users.map((user) => user.id).filter((id): id is number => id !== undefined);
+            const userIds = list.map((user) => user.id).filter((id): id is number => id !== undefined);
             const role:any = await prisma.role.create({
                 data: {
                     name,
@@ -30,16 +32,30 @@ class RoleDao{
             throw new Error('Failed to create role with users.');
         }
     }
-    async deleteRole(id:number){
+
+    async delete(id: number) {
         id = Math.floor(id)
         await prisma.role.delete({
             where: {id},
         });
     }
-    async updateRole(id:number,name:string,users:UserModel[]){
+
+    async findAll() {
+        return prisma.role.findMany({
+            include: {
+                users: {
+                    include: {
+                        user: true,
+                    },
+                },
+            },
+        });
+    }
+
+    async update(id: number, name: string, list: UserModel[]) {
         id = Math.floor(id);
         try {
-            const userIds = users
+            const userIds = list
                 .map((user) => user.id)
                 .filter((id): id is number => id !== undefined)
                 .map((id) => Math.floor(id));
@@ -68,16 +84,6 @@ class RoleDao{
             throw new Error('Failed to create role with users.');
         }
     }
-    async getAllRoles(){
-        return prisma.role.findMany({
-            include: {
-                users: {
-                    include: {
-                        user: true,
-                    },
-                },
-            },
-        });
-    }
+
 }
 export default RoleDao
