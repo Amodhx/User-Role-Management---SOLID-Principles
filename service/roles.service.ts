@@ -1,21 +1,25 @@
 import {RoleModel} from "../model/role.model";
-import roleDao from "../dao/role.dao";
+import RoleDao from "../dao/role.dao";
 
 class RolesService{
+    rolesDao:RoleDao;
+
+    constructor(roleDao : RoleDao) {
+        this.rolesDao = roleDao;
+    }
 
     async saveRole(role:RoleModel){
-        return await roleDao.createRole(role.name,role.users);
+        return await this.rolesDao.createRole(role.name,role.users);
     }
     async updateRole(role:RoleModel){
-        return await roleDao.updateRole(role.id,role.name,role.users);
+        return await this.rolesDao.updateRole(role.id,role.name,role.users);
     }
     async deleteRole(id:number){
-        return await roleDao.deleteRole(id);
+        return await this.rolesDao.deleteRole(id);
     }
     async getAllRoles(){
-        return await roleDao.getAllRoles();
+        return await this.rolesDao.getAllRoles();
     }
 
 }
-const rolesService = new RolesService();
-export default rolesService
+export default RolesService

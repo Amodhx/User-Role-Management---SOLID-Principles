@@ -80,5 +80,4 @@ class RoleDao{
         });
     }
 }
-const roleDao = new RoleDao();
-export default roleDao
+export default RoleDao

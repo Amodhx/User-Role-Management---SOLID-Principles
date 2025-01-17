@@ -1,10 +1,14 @@
-import rolesService from "../service/roles.service";
+import RolesService from "../service/roles.service";
 
 class RolesController{
+    roleService:RolesService;
+    constructor(roleService : RolesService) {
+        this.roleService = roleService;
+    }
 
     async saveRole(req: any, resp: any) {
         try {
-            const user = await rolesService.saveRole(req.body)
+            const user = await this.roleService.saveRole(req.body)
             resp.status(201).send(user)
         }catch (e){
             resp.status(500).send("INTERNAL SERVER ERROR")
@@ -12,7 +16,7 @@ class RolesController{
     }
     async updateRole(req: any, resp: any) {
         try {
-            const user = await rolesService.updateRole(req.body);
+            const user = await this.roleService.updateRole(req.body);
             resp.status(201).send(user);
         }catch (err){
             resp.status(500).send(err)
@@ -20,7 +24,7 @@ class RolesController{
     }
     async deleteRole(req: any, resp: any) {
         try {
-            await rolesService.deleteRole(req.query['id']);
+            await this.roleService.deleteRole(req.query['id']);
             resp.status(201).send("Role Deleted")
         }catch (err){
             console.log(err)
@@ -29,11 +33,10 @@ class RolesController{
     }
     async getAllRoles(req: any, resp: any) {
         try {
-            resp.status(201).send(await rolesService.getAllRoles());
+            resp.status(201).send(await this.roleService.getAllRoles());
         } catch (err) {
             resp.status(500).send(err);
         }
     }
 }
-const rolesController = new RolesController();
-export default rolesController
+export default RolesController
