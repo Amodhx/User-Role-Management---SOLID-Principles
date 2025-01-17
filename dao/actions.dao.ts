@@ -67,5 +67,4 @@ class ActionsDao{
     }
 }
 
-const actionsDAO = new ActionsDao();
-export default actionsDAO;
+export default ActionsDao;

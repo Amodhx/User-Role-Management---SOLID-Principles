@@ -1,20 +1,22 @@
 import {ActionModel} from "../model/action.model";
-import actionsDAO from "../dao/actions.dao";
+import ActionsDao from "../dao/actions.dao";
 
 class ActionsService{
-
+    actionsDAO : ActionsDao;
+    constructor(actionsDAO : ActionsDao) {
+        this.actionsDAO = actionsDAO;
+    }
     async saveAction(action:ActionModel){
-        return await actionsDAO.createAction(action.name,action.roles);
+        return await this.actionsDAO.createAction(action.name,action.roles);
     }
     async updateAction(action:ActionModel){
-        return await actionsDAO.updateAction(action.id,action.name,action.roles);
+        return await this.actionsDAO.updateAction(action.id,action.name,action.roles);
     }
     async deleteAction(id:number){
-        return await actionsDAO.deleteAction(id);
+        return await this.actionsDAO.deleteAction(id);
     }
     async getAllActions(){
-        return actionsDAO.getAllActions();
+        return this.actionsDAO.getAllActions();
     }
 }
-const actionService = new ActionsService();
-export default actionService
+export default ActionsService
