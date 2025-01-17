@@ -1,20 +1,23 @@
 import {UserModel} from "../model/user.model";
-import userDao from "../dao/user.dao";
+import UserDao from "../dao/user.dao";
 
 class UserService{
+    userDao : UserDao;
+    constructor(userDAO : UserDao) {
+        this.userDao = userDAO;
+    }
 
     async saveUser(userData : UserModel){
-        return await userDao.createUser(userData.name,userData.roles);
+        return await this.userDao.createUser(userData.name,userData.roles);
     }
     async getAllUsers(){
-        return await userDao.getAllUsers();
+        return await this.userDao.getAllUsers();
     }
     async updateUser(userData:UserModel){
-        return await userDao.updateUser(userData.id ,userData.name,userData.roles);
+        return await this.userDao.updateUser(userData.id ,userData.name,userData.roles);
     }
     async deleteUser(id:number){
-        return await userDao.deleteUser(id);
+        return await this.userDao.deleteUser(id);
     }
 }
-const userService = new UserService();
-export default userService;
+export default UserService;

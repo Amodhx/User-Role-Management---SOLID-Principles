@@ -70,5 +70,4 @@ class UserDao{
         });
     }
 }
-const userDao = new UserDao();
-export default userDao;
+export default UserDao;
